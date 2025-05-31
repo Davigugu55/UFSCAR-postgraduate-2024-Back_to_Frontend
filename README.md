@@ -59,10 +59,17 @@ To test the API endpoints, you can use the provided `test-api.html` file. This f
    - Update Product
    - Update Product image
 
-## 🐳 Docker Compose Setup
+## 🚀 Project Setup
 
+1. Clone the repository
+2. Run:
 ```bash
+# Run postgreSQL database in Docker Container
+cd src/infra
 docker-compose up -d
+
+# Return to initial folder
+cd ../..
 
 # Install dependencies
 npm install
