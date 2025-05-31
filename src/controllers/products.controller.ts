@@ -10,7 +10,7 @@ interface Product {
   price: number
   description?: string
   category?: string
-  pictureUrl?: string
+  image_url?: string
 }
 
 export async function getAllProducts(req: FastifyRequest, reply: FastifyReply) {
@@ -35,7 +35,7 @@ export async function getProductById(req: FastifyRequest<{ Params: { id: string 
 }
 
 export async function createProduct(
-  req: FastifyRequest<{ Body: { name: string; price: number; description?: string; category?: string; pictureUrl?: string } }>,
+  req: FastifyRequest<{ Body: { name: string; price: number; description?: string; category?: string; image_url?: string } }>,
   reply: FastifyReply
 ) {
   try {
@@ -45,7 +45,7 @@ export async function createProduct(
         price: req.body.price,
         description: req.body.description,
         category: req.body.category,
-        image_url: req.body.pictureUrl,
+        image_url: req.body.image_url,
       })
       .returning('*')  // retorna o registro inserido (funciona no Postgres)
     return reply.status(201).send(newProduct)
@@ -56,7 +56,7 @@ export async function createProduct(
 }
 
 export async function updateProduct(
-  req: FastifyRequest<{ Params: { id: string }; Body: { name?: string; price?: number; description?: string; category?: string; pictureUrl?: string } }>,
+  req: FastifyRequest<{ Params: { id: string }; Body: { name?: string; price?: number; description?: string; category?: string; image_url?: string } }>,
   reply: FastifyReply
 ) {
   try {
@@ -76,7 +76,7 @@ export async function updateProduct(
 }
 
 export async function updateProductImage(
-  req: FastifyRequest<{ Params: { id: string }; Body: { pictureUrl: string } }>,
+  req: FastifyRequest<{ Params: { id: string }; Body: { image_url: string } }>,
   reply: FastifyReply
 ) {
   try {

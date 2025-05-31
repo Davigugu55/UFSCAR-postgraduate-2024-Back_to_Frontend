@@ -2,121 +2,189 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testar API de Produtos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 600px;
-        margin: 20px auto;
-      }
-      label {
-        display: block;
-        margin-top: 10px;
-      }
-      input,
-      button {
-        padding: 8px;
-        margin-top: 5px;
-        width: 100%;
-      }
-      button {
-        cursor: pointer;
-      }
       .log {
         margin-top: 20px;
-        background: #eee;
-        padding: 10px;
+        background: #f8f9fa;
+        padding: 15px;
         white-space: pre-wrap;
         max-height: 200px;
         overflow-y: auto;
+        border-radius: 5px;
+      }
+      .card-img-top {
+        height: 200px;
+        object-fit: cover;
+      }
+      .section-title {
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
       }
     </style>
   </head>
-  <body>
-    <h1>Testar API de Produtos</h1>
+  <body class="bg-light">
+    <div class="container py-4">
+      <h1 class="text-center mb-4">Gerenciamento de Produtos</h1>
 
-    <h2>Criar Produto</h2>
-    <form id="createForm">
-      <label
-        >Nome:
-        <input type="text" id="name" required />
-      </label>
-      <label
-        >Descrição:
-        <input type="text" id="description" required />
-      </label>
-      <label
-        >Preço:
-        <input type="number" step="0.01" id="price" required />
-      </label>
-      <label
-        >Categoria:
-        <input type="text" id="category" required />
-      </label>
-      <label
-        >URL da Imagem:
-        <input type="url" id="pictureUrl" required />
-      </label>
-      <button type="submit">Criar Produto</button>
-    </form>
+      <!-- Product Listing Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <h2 class="section-title">Lista de Produtos</h2>
+          <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-primary" onclick="loadProducts()">
+              <i class="bi bi-arrow-clockwise"></i> Atualizar Lista
+            </button>
+          </div>
+          <div id="productsList" class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Products will be loaded here -->
+          </div>
+        </div>
+      </div>
 
-    <h2>Deletar Produto</h2>
-    <form id="deleteForm">
-      <label
-        >ID do Produto:
-        <input type="number" id="deleteId" required />
-      </label>
-      <button type="submit">Deletar Produto</button>
-    </form>
+      <!-- Create Product Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h2 class="h4 mb-0">Criar Produto</h2>
+            </div>
+            <div class="card-body">
+              <form id="createForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="name" required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Preço:</label>
+                    <input type="number" step="0.01" class="form-control" id="price" required />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Descrição:</label>
+                  <input type="text" class="form-control" id="description" required />
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Categoria:</label>
+                    <input type="text" class="form-control" id="category" required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">URL da Imagem:</label>
+                    <input type="url" class="form-control" id="image_url" required />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Criar Produto</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- Novo: Atualizar Produto -->
-    <h2>Atualizar Produto</h2>
-    <form id="updateProductForm">
-      <label
-        >ID do Produto:
-        <input type="text" id="updateId" required />
-      </label>
-      <label
-        >Nome:
-        <input type="text" id="updateName" />
-      </label>
-      <label
-        >Preço:
-        <input type="number" step="0.01" id="updatePrice" />
-      </label>
-      <label
-        >Descrição:
-        <input type="text" id="updateDescription" />
-      </label>
-      <label
-        >Categoria:
-        <input type="text" id="updateCategory" />
-      </label>
-      <label
-        >URL da Imagem:
-        <input type="url" id="updatePictureUrl" />
-      </label>
-      <button type="submit">Atualizar Produto</button>
-    </form>
+      <!-- Update Product Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-warning">
+              <h2 class="h4 mb-0">Atualizar Produto</h2>
+            </div>
+            <div class="card-body">
+              <form id="updateProductForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">ID do Produto:</label>
+                    <input type="text" class="form-control" id="updateId" required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="updateName" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Preço:</label>
+                    <input type="number" step="0.01" class="form-control" id="updatePrice" />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Categoria:</label>
+                    <input type="text" class="form-control" id="updateCategory" />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Descrição:</label>
+                  <input type="text" class="form-control" id="updateDescription" />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">URL da Imagem:</label>
+                  <input type="url" class="form-control" id="updateImageUrl" />
+                </div>
+                <button type="submit" class="btn btn-warning">Atualizar Produto</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- Novo: Atualizar Imagem do Produto -->
-    <h2>Atualizar Imagem do Produto</h2>
-    <form id="updateImageForm">
-      <label
-        >ID do Produto:
-        <input type="number" id="updateImageId" required />
-      </label>
-      <label
-        >URL da Imagem:
-        <input type="url" id="updateImageUrl" required />
-      </label>
-      <button type="submit">Atualizar Imagem</button>
-    </form>
+      <!-- Delete Product Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-danger text-white">
+              <h2 class="h4 mb-0">Deletar Produto</h2>
+            </div>
+            <div class="card-body">
+              <form id="deleteForm">
+                <div class="mb-3">
+                  <label class="form-label">ID do Produto:</label>
+                  <input type="number" class="form-control" id="deleteId" required />
+                </div>
+                <button type="submit" class="btn btn-danger">Deletar Produto</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="log" id="log"></div>
+      <!-- Update Image Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-info text-white">
+              <h2 class="h4 mb-0">Atualizar Imagem do Produto</h2>
+            </div>
+            <div class="card-body">
+              <form id="updateImageForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">ID do Produto:</label>
+                    <input type="number" class="form-control" id="updateImageId" required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">URL da Imagem:</label>
+                    <input type="url" class="form-control" id="updateImageOnlyUrl" required />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-info text-white">Atualizar Imagem</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="log" id="log"></div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      const baseURL = "http://localhost:3333/products"; // ajuste se precisar
+      const baseURL = "http://localhost:3333/products";
       const logEl = document.getElementById("log");
 
       function log(message) {
@@ -124,120 +192,149 @@
         logEl.scrollTop = logEl.scrollHeight;
       }
 
-      // Criar produto
-      document
-        .getElementById("createForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const name = document.getElementById("name").value;
-          const description = document.getElementById("description").value;
-          const price = parseFloat(document.getElementById("price").value);
-          const category = document.getElementById("category").value;
-          const pictureUrl = document.getElementById("pictureUrl").value;
+      // Load and display products
+      async function loadProducts() {
+        try {
+          const res = await fetch(baseURL);
+          if (!res.ok) throw new Error(`Erro ${res.status}`);
+          const products = await res.json();
+          
+          const productsList = document.getElementById('productsList');
+          productsList.innerHTML = '';
+          
+          products.forEach(product => {
+            const productCard = `
+              <div class="col">
+                <div class="card h-100">
+                  <img src="${product.image_url}" class="card-img-top" alt="${product.name}">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">${product.description}</p>
+                    <p class="card-text">
+                      <small class="text-muted">Categoria: ${product.category}</small><br>
+                      <strong>R$ ${Number(product.price).toFixed(2)}</strong>
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">ID: ${product.id}</small>
+                  </div>
+                </div>
+              </div>
+            `;
+            productsList.innerHTML += productCard;
+          });
+        } catch (err) {
+          log("Erro ao carregar produtos: " + err.message);
+        }
+      }
 
-          const product = { name, description, price, category, pictureUrl };
+      // Load products when page loads
+      document.addEventListener('DOMContentLoaded', loadProducts);
 
-          try {
-            const res = await fetch(baseURL, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(product),
-            });
-            if (!res.ok) throw new Error(`Erro ${res.status}`);
-            const data = await res.json();
-            log("Produto criado:\n" + JSON.stringify(data, null, 2));
-            e.target.reset();
-          } catch (err) {
-            log("Erro ao criar produto: " + err.message);
-          }
-        });
+      // Create product
+      document.getElementById("createForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const description = document.getElementById("description").value;
+        const price = parseFloat(document.getElementById("price").value);
+        const category = document.getElementById("category").value;
+        const image_url = document.getElementById("image_url").value;
 
-      // Deletar produto
-      document
-        .getElementById("deleteForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const id = document.getElementById("deleteId").value;
+        const product = { name, description, price, category, image_url };
 
-          try {
-            const res = await fetch(`${baseURL}/${id}`, { method: "DELETE" });
-            if (!res.ok) throw new Error(`Erro ${res.status}`);
-            const data = await res.json();
-            log("Produto deletado:\n" + JSON.stringify(data, null, 2));
-            e.target.reset();
-          } catch (err) {
-            log("Erro ao deletar produto: " + err.message);
-          }
-        });
+        try {
+          const res = await fetch(baseURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(product),
+          });
+          if (!res.ok) throw new Error(`Erro ${res.status}`);
+          const data = await res.json();
+          log("Produto criado:\n" + JSON.stringify(data, null, 2));
+          e.target.reset();
+          loadProducts(); // Reload the products list
+        } catch (err) {
+          log("Erro ao criar produto: " + err.message);
+        }
+      });
 
-      // Atualizar produto (PUT /products/:id)
-      document
-        .getElementById("updateProductForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
+      // Delete product
+      document.getElementById("deleteForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("deleteId").value;
 
-          const id = document.getElementById("updateId").value.trim();
-          const name = document.getElementById("updateName").value.trim();
-          const priceVal = document.getElementById("updatePrice").value;
-          const description = document
-            .getElementById("updateDescription")
-            .value.trim();
-          const category = document
-            .getElementById("updateCategory")
-            .value.trim();
-          const pictureUrl = document
-            .getElementById("updatePictureUrl")
-            .value.trim();
+        try {
+          const res = await fetch(`${baseURL}/${id}`, { method: "DELETE" });
+          if (!res.ok) throw new Error(`Erro ${res.status}`);
+          const data = await res.json();
+          log("Produto deletado:\n" + JSON.stringify(data, null, 2));
+          e.target.reset();
+          loadProducts(); // Reload the products list
+        } catch (err) {
+          log("Erro ao deletar produto: " + err.message);
+        }
+      });
 
-          const body = {};
-          if (name) body.name = name;
-          if (priceVal) body.price = Number(priceVal);
-          if (description) body.description = description;
-          if (category) body.category = category;
-          if (pictureUrl) body.pictureUrl = pictureUrl;
+      // Update product
+      document.getElementById("updateProductForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-          if (Object.keys(body).length === 0) {
-            alert("Informe pelo menos um campo para atualizar.");
-            return;
-          }
+        const id = document.getElementById("updateId").value.trim();
+        const name = document.getElementById("updateName").value.trim();
+        const priceVal = document.getElementById("updatePrice").value;
+        const description = document.getElementById("updateDescription").value.trim();
+        const category = document.getElementById("updateCategory").value.trim();
+        const image_url = document.getElementById("updateImageUrl").value.trim();
 
-          try {
-            const res = await fetch(`${baseURL}/${id}`, {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(body),
-            });
-            if (!res.ok) throw new Error(`Erro ${res.status}`);
-            const data = await res.json();
-            log("Produto atualizado:\n" + JSON.stringify(data, null, 2));
-            e.target.reset();
-          } catch (err) {
-            log("Erro ao atualizar produto: " + err.message);
-          }
-        });
+        const body = {};
+        if (name) body.name = name;
+        if (priceVal) body.price = Number(priceVal);
+        if (description) body.description = description;
+        if (category) body.category = category;
+        if (image_url) body.image_url = image_url;
 
-      // Atualizar imagem do produto (PUT /products/:id/image)
-      document
-        .getElementById("updateImageForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const id = document.getElementById("updateImageId").value;
-          const image_url = document.getElementById("updateImageUrl").value.trim();
+        if (Object.keys(body).length === 0) {
+          alert("Informe pelo menos um campo para atualizar.");
+          return;
+        }
 
-          try {
-            const res = await fetch(`${baseURL}/${id}/image`, {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ image_url }),
-            });
-            if (!res.ok) throw new Error(`Erro ${res.status}`);
-            const data = await res.json();
-            log("Imagem atualizada:\n" + JSON.stringify(data, null, 2));
-            e.target.reset();
-          } catch (err) {
-            log("Erro ao atualizar imagem: " + err.message);
-          }
-        });
+        try {
+          const res = await fetch(`${baseURL}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          if (!res.ok) throw new Error(`Erro ${res.status}`);
+          const data = await res.json();
+          log("Produto atualizado:\n" + JSON.stringify(data, null, 2));
+          e.target.reset();
+          loadProducts(); // Reload the products list
+        } catch (err) {
+          log("Erro ao atualizar produto: " + err.message);
+        }
+      });
+
+      // Update product image
+      document.getElementById("updateImageForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("updateImageId").value;
+        const image_url = document.getElementById("updateImageOnlyUrl").value.trim();
+
+        try {
+          const res = await fetch(`${baseURL}/${id}/image`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image_url }),
+          });
+          if (!res.ok) throw new Error(`Erro ${res.status}`);
+          const data = await res.json();
+          log("Imagem atualizada:\n" + JSON.stringify(data, null, 2));
+          e.target.reset();
+          loadProducts(); // Reload the products list
+        } catch (err) {
+          log("Erro ao atualizar imagem: " + err.message);
+        }
+      });
     </script>
   </body>
 </html>
