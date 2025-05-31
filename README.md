@@ -29,7 +29,7 @@ This project is part of my postgraduate studies in Web Development. The main obj
 
 - **POST /products**  
   ➝ Create a new product with the fields:  
-  `name`, `price`, `description`, `category`, `pictureUrl`.
+  `name`, `price`, `description`, `category`, `image_url`.
 
 - **PUT /products/:id**  
   ➝ Update an existing product.
@@ -43,7 +43,7 @@ This project is part of my postgraduate studies in Web Development. The main obj
 - Migrations handled by Knex.js to create the `products` table.
 - Example table structure:
 
-| id  | name  | price | description | category | pictureUrl |
+| id  | name  | price | description | category | image_url |
 |-----|-------|-------|-------------|----------|------------|
 
 ## 🐳 Docker Compose Setup
