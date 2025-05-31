@@ -10,6 +10,8 @@ exports.up = function(knex) {
     table.decimal('price', 10, 2).notNullable();
     table.integer('quantity').defaultTo(0);
     table.timestamps(true, true); 
+    table.string('image_url');
+    table.string('category');
   });
 };
 

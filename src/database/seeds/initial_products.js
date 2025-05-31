@@ -10,16 +10,18 @@ exports.seed = async function(knex) {
       id: '23',
       name: 'Produto 23',
       description: 'Descrição do Produto 23',
+      category: 'Categoria 23',
       price: 100.00,
-      stock: 10,
+      quantity: 10,
       image_url: 'teste.com/23'
     },
     {
       id: '24',
       name: 'Produto 24',
       description: 'Descrição do Produto 24',
+      category: 'Categoria 24',
       price: 200.00,
-      stock: 5,
+      quantity: 5,
       image_url: 'teste.com/24'
     },
   ]);
