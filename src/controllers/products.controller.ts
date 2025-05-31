@@ -45,7 +45,7 @@ export async function createProduct(
         price: req.body.price,
         description: req.body.description,
         category: req.body.category,
-        pictureUrl: req.body.pictureUrl,
+        image_url: req.body.pictureUrl,
       })
       .returning('*')  // retorna o registro inserido (funciona no Postgres)
     return reply.status(201).send(newProduct)
@@ -82,7 +82,7 @@ export async function updateProductImage(
   try {
     const updatedRows = await db('products')
       .where('id', req.params.id)
-      .update({ pictureUrl: req.body.pictureUrl })
+      .update(req.body)
       .returning('*')
 
     if (updatedRows.length === 0) {

@@ -222,13 +222,13 @@
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const id = document.getElementById("updateImageId").value;
-          const image = document.getElementById("updateImageUrl").value.trim();
+          const image_url = document.getElementById("updateImageUrl").value.trim();
 
           try {
             const res = await fetch(`${baseURL}/${id}/image`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ image }),
+              body: JSON.stringify({ image_url }),
             });
             if (!res.ok) throw new Error(`Erro ${res.status}`);
             const data = await res.json();
