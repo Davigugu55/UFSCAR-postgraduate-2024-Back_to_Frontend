@@ -57,5 +57,8 @@ npm install
 # Run migrations
 npx knex migrate:latest
 
+# Run seed
+npx knex seed:run --knexfile knexfile.js
+
 # Start the Fastify server
 npm run dev
