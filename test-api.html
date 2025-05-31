@@ -42,7 +42,7 @@
               <i class="bi bi-arrow-clockwise"></i> Atualizar Lista
             </button>
           </div>
-          <div id="productsList" class="row row-cols-1 row-cols-md-3 g-4">
+          <div id="productsList" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
             <!-- Products will be loaded here -->
           </div>
         </div>
@@ -100,7 +100,9 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label class="form-label">ID do Produto:</label>
-                    <input type="text" class="form-control" id="updateId" required />
+                    <select class="form-select" id="updateId" required>
+                      <option value="">Selecione um produto</option>
+                    </select>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Nome:</label>
@@ -143,7 +145,9 @@
               <form id="deleteForm">
                 <div class="mb-3">
                   <label class="form-label">ID do Produto:</label>
-                  <input type="number" class="form-control" id="deleteId" required />
+                  <select class="form-select" id="deleteId" required>
+                    <option value="">Selecione um produto</option>
+                  </select>
                 </div>
                 <button type="submit" class="btn btn-danger">Deletar Produto</button>
               </form>
@@ -164,7 +168,9 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label class="form-label">ID do Produto:</label>
-                    <input type="number" class="form-control" id="updateImageId" required />
+                    <select class="form-select" id="updateImageId" required>
+                      <option value="">Selecione um produto</option>
+                    </select>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label class="form-label">URL da Imagem:</label>
@@ -199,10 +205,26 @@
           if (!res.ok) throw new Error(`Erro ${res.status}`);
           const products = await res.json();
           
+          // Sort products by name
+          products.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+          
           const productsList = document.getElementById('productsList');
           productsList.innerHTML = '';
           
+          // Populate the dropdowns
+          const updateIdSelect = document.getElementById('updateId');
+          const deleteIdSelect = document.getElementById('deleteId');
+          const updateImageIdSelect = document.getElementById('updateImageId');
+          
+          // Clear existing options except the first one
+          [updateIdSelect, deleteIdSelect, updateImageIdSelect].forEach(select => {
+            while (select.options.length > 1) {
+              select.remove(1);
+            }
+          });
+          
           products.forEach(product => {
+            // Add to products list
             const productCard = `
               <div class="col">
                 <div class="card h-100">
@@ -222,6 +244,12 @@
               </div>
             `;
             productsList.innerHTML += productCard;
+
+            // Add to dropdowns
+            const option = new Option(`${product.name} (ID: ${product.id})`, product.id);
+            updateIdSelect.add(option.cloneNode(true));
+            deleteIdSelect.add(option.cloneNode(true));
+            updateImageIdSelect.add(option.cloneNode(true));
           });
         } catch (err) {
           log("Erro ao carregar produtos: " + err.message);
