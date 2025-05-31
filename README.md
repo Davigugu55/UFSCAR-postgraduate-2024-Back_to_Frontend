@@ -46,6 +46,19 @@ This project is part of my postgraduate studies in Web Development. The main obj
 | id  | name  | price | description | category | image_url |
 |-----|-------|-------|-------------|----------|------------|
 
+## 🧪 Testing
+
+To test the API endpoints, you can use the provided `test-api.html` file. This file contains a simple interface to interact with all Create, Update and Delete operations.
+
+### How to Use the Test Interface
+
+1. Open `test-api.html` in your web browser
+2. The interface provides buttons for each CRUD operation:
+   - Create New Product
+   - Delete Product
+   - Update Product
+   - Update Product image
+
 ## 🐳 Docker Compose Setup
 
 ```bash
