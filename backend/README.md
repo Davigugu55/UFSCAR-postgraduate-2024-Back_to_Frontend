@@ -62,23 +62,41 @@ To test the API endpoints, you can use the provided `test-api.html` file. This f
 ## 🚀 Project Setup
 
 1. Clone the repository
-2. Run:
+2. Install FNM and Node (If not installed)
+```bash
+# Installing unzip
+sudo apt update
+sudo apt install unzip
+
+# Installing fnm
+curl -fsSL https://fnm.vercel.app/install | bash
+
+# Installing Node using fnm
+fnm install 24
+node -v
+```
+2. Install [Yarn Berry](https://github.com/yarnpkg/berry):
+```bash
+# Enable corepack
+corepack enable
+
+# Set Yarn version to stable in your project
+yarn set version stable
+```
+3. Run:
 ```bash
 # Run postgreSQL database in Docker Container
-cd src/infra
 docker-compose up -d
 
-# Return to initial folder
-cd ../..
-
 # Install dependencies
-npm install
+yarn install
 
-# Run migrations
-npx knex migrate:latest
+# Run latest migrations
+yarn migrate
 
-# Run seed
-npx knex seed:run --knexfile knexfile.js
+# Run seeds
+yarn seed
 
 # Start the Fastify server
-npm run dev
+yarn dev
+```
