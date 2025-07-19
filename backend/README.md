@@ -99,4 +99,6 @@ yarn seed
 
 # Start the Fastify server
 yarn dev
+
+# Open test webpage test-api.html
 ```
