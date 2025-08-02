@@ -1,7 +1,8 @@
 import './ProductCard.css';
 import PropTypes from 'prop-types';
+import { Product } from '../types/product'; // Adjust the import path as necessary
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="product-card">
       <div className="product-image-wrapper">
