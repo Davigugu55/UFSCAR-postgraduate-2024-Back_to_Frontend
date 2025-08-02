@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import productsData from '../data/data.json';
 import ProductCard from '../components/ProductCard';
 import { Container, Form, Button } from 'react-bootstrap';
