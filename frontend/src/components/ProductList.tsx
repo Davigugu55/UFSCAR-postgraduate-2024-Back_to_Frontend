@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import productsData from '../data/data.json';
 import ProductCard from '../components/ProductCard';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 const ProductList = () => {
   const [filterId, setFilterId] = useState('');
@@ -19,16 +19,26 @@ const ProductList = () => {
 
   return (
     <Container className="py-4">
-      <div className="d-flex mb-4 gap-2">
-        <Form.Control
-          type="text"
-          placeholder="Código"
-          value={filterId}
-          onChange={(e) => setFilterId(e.target.value)}
-          style={{ maxWidth: '200px' }}
-        />
-        <Button onClick={handleFilter}>Filtrar</Button>
-      </div>
+      <Row className="align-items-center mb-3">
+        <Col>
+          <Form className="d-flex">
+            <Form.Control
+              type="text"
+              placeholder="Código do produto"
+              value={filterId}
+              onChange={(e) => setFilterId(e.target.value)}
+            />
+            <Button onClick={handleFilter} className="ms-2">
+              Filtrar
+            </Button>
+          </Form>
+        </Col>
+        <Col></Col>
+        <Col className="text-end">
+          <Button variant="success" onClick={handleFilter}>Novo produto</Button>
+        </Col>
+      </Row>
+
       {filteredProducts.map(product => (
         <ProductCard key={product.id} product={product} />
       ))}
