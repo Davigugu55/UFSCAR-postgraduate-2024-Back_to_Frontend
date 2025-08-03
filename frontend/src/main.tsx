@@ -9,7 +9,7 @@ import ProductDetails from './pages/ProductDetails';
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '*',
         element: <App />,
         children: [
             { index: true, element: <Home /> },
