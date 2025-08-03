@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "_version": "24.0.0",
   "extends": "@tsconfig/node24/tsconfig.json",
-  // "include": ["src/**/*"],
-  // "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
 
   "compilerOptions": {
     "lib": [

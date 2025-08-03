@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import ProductDetails from './pages/ProductDetails';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomNavbar from './components/CustomNavbar';
 
@@ -12,6 +13,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/products/:id" element={<ProductDetails />} />
+                    <Route path="/products/new" element={<ProductDetails />} />
                 </Routes>
             </div>
         </div>
