@@ -1,17 +1,28 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
+import Home from './pages/Home';
+import About from './pages/About';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'about', element: <About /> },
+    ],
+  },
+]);
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <StrictMode>
+      <RouterProvider router={router}/>
+    </StrictMode>
   );
 } else {
   console.error("Root element not found");

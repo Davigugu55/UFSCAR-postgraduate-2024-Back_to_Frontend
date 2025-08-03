@@ -6,12 +6,14 @@ import CustomNavbar from './components/CustomNavbar';
 
 function App() {
     return (
-        <div>
+        <div className="d-flex">
             <CustomNavbar />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-            </Routes>
+            <div className="flex-grow-1 p-4">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+            </div>
         </div>
     );
 }
