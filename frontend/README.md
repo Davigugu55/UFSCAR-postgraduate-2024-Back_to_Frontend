@@ -39,6 +39,7 @@ This project is the frontend component of my postgraduate studies in Web Develop
 
 1. Clone the repository
 2. Install FNM and Node (If not installed)
+
 ```bash
 # Installing unzip
 sudo apt update
@@ -51,7 +52,9 @@ curl -fsSL https://fnm.vercel.app/install | bash
 fnm install 24
 node -v
 ```
+
 2. Install [Yarn Berry](https://github.com/yarnpkg/berry):
+
 ```bash
 # Enable corepack
 corepack enable
@@ -59,7 +62,9 @@ corepack enable
 # Set Yarn version to stable in your project
 yarn set version stable
 ```
+
 3. Install dependencies and start the dev server:
+
 ```bash
 # Install dependencies
 yarn install
@@ -67,4 +72,5 @@ yarn install
 # Start the VITE server
 yarn dev
 ```
+
 4. Open your browser at the provided Vite URL (usually `http://localhost:5173`).

@@ -1,7 +1,6 @@
 import ProductList from '../components/ProductList.jsx';
 
 function Home() {
-
     return (
         <div>
             <ProductList />

@@ -1,91 +1,91 @@
 .product-card {
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 32px;
-  margin: 20px 0;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1000px;
-  /* Match mockup dimensions */
-  height: 288px;
-  padding: 0 32px 0 12px;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 32px;
+    margin: 20px 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    /* Match mockup dimensions */
+    height: 288px;
+    padding: 0 32px 0 12px;
 }
 
 .product-image-wrapper {
-  /* Make the image container a circle */
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 20px;
-  flex-shrink: 0;
+    /* Make the image container a circle */
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+    flex-shrink: 0;
 }
 
 .product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .product-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* Give content a height to allow space-between to work */
-  height: 240px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Give content a height to allow space-between to work */
+    height: 240px;
 }
 
 .product-title {
-  font-size: 20px;
-  margin-bottom: 12px;
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
 .product-category {
-  font-size: 12.8px;
-  color: #666;
-  margin-bottom: 12px;
+    font-size: 12.8px;
+    color: #666;
+    margin-bottom: 12px;
 }
 
 .product-price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #007a7a;
-  /* Let the flexbox handle spacing */
-  margin-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #007a7a;
+    /* Let the flexbox handle spacing */
+    margin-bottom: 0;
 }
 
 .product-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
 }
 
 /* Increase specificity to override Bootstrap */
 .product-actions .btn {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .product-actions .edit-btn {
-  background-color: #eee;
-  color: #333;
+    background-color: #eee;
+    color: #333;
 }
 
 .product-actions .edit-btn:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .product-actions .delete-btn {
-  background-color: #c62828;
-  color: white;
+    background-color: #c62828;
+    color: white;
 }
 
 .product-actions .delete-btn:hover {
-  background-color: #b71c1c;
+    background-color: #b71c1c;
 }
