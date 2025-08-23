@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  
   "dependencies": {
     "@fastify/cors": "^11",
     "fastify": "^5",

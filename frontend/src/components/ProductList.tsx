@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Product } from '../types/product'; // Your Product interface
-import rawProductsData from '../data/data.json';
 import ProductCard from '../components/ProductCard';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const productsData: Product[] = rawProductsData as Product[];
+const DEFAULT_API = 'http://localhost:3333';
 
 const ProductList = () => {
     const [filterId, setFilterId] = useState('');
@@ -13,24 +13,44 @@ const ProductList = () => {
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const navigate = useNavigate();
 
-    useMemo(() => {
-        const stored = localStorage.getItem('products');
-        const parsed: Product[] = stored ? JSON.parse(stored) : productsData;
+    useEffect(() => {
+        const controller = new AbortController();
+        const load = async () => {
+            try {
+                const res = await axios.get(`${DEFAULT_API}/products`, { signal: controller.signal });
+                const products: Product[] = res.data;
 
-        localStorage.setItem('products', JSON.stringify(parsed));
+                console.log('Fetched products:', products);
 
-        setAllProducts(parsed);
-        setFilteredProducts(parsed);
+                // Sort products by name (pt-BR)
+                products.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+
+                setAllProducts(products);
+                setFilteredProducts(products);
+            } catch (err: any) {
+                console.error('Failed to fetch products from API:', err?.message || err);
+                // No fallbacks — rely exclusively on the backend
+                setAllProducts([]);
+                setFilteredProducts([]);
+            }
+        };
+
+        load();
+        // return () => controller.abort();
     }, []);
 
     const handleFilter = () => {
-        if (!filterId) {
+        if (!filterId || !filterId.trim()) {
             setFilteredProducts(allProducts);
-        } else {
-            const id = parseInt(filterId);
-            const match = allProducts.filter((p) => p.id === id);
-            setFilteredProducts(match);
+            return;
         }
+        const id = parseInt(filterId, 10);
+        if (Number.isNaN(id)) {
+            setFilteredProducts([]);
+            return;
+        }
+        const match = allProducts.filter((p) => p.id === id);
+        setFilteredProducts(match);
     };
 
     const handleNewProduct = () => {
@@ -42,12 +62,7 @@ const ProductList = () => {
             <Row className="align-items-center mb-3">
                 <Col>
                     <Form className="d-flex">
-                        <Form.Control
-                            type="text"
-                            placeholder="Código do produto"
-                            value={filterId}
-                            onChange={(e) => setFilterId(e.target.value)}
-                        />
+                        <Form.Control type="text" placeholder="Código do produto" value={filterId} onChange={(e) => setFilterId(e.target.value)} />
                         <Button onClick={handleFilter} className="ms-2">
                             Filtrar
                         </Button>
