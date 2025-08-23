@@ -23,7 +23,6 @@ const ProductDetailsForm = () => {
         updated_at: new Date().toISOString(),
     });
 
-    // Load product from backend when editing, otherwise keep default (new product)
     useEffect(() => {
         if (id) {
             setIsEditing(true);
@@ -31,7 +30,6 @@ const ProductDetailsForm = () => {
             axios
                 .get(`${API_URL}/${id}`, { signal: controller.signal })
                 .then((res) => {
-                    // Expect backend to return the product object
                     setFormData(res.data as Product);
                 })
                 .catch((err) => {
@@ -40,7 +38,6 @@ const ProductDetailsForm = () => {
             return () => controller.abort();
         } else {
             setIsEditing(false);
-            // keep initial empty form; server will assign id on create
             setFormData((prev) => ({ ...prev, id: 0 }));
         }
     }, [id]);

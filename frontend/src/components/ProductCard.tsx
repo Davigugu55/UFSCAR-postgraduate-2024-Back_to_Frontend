@@ -16,7 +16,6 @@ const ProductCard = ({ product }: { product: Product }) => {
         if (!confirm(`Excluir o produto "${product.name}" (ID ${product.id})?`)) return;
         try {
             await axios.delete(`${API_URL}/${product.id}`);
-            // simplest way to refresh the list — parent can be improved later to avoid full reload
             window.location.reload();
         } catch (err) {
             console.error('Failed to delete product:', err);
