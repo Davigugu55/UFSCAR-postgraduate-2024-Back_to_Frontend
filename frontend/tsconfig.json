@@ -6,14 +6,7 @@
     "exclude": ["node_modules", "dist"],
 
     "compilerOptions": {
-        "lib": [
-            "dom",
-            "es2024",
-            "ESNext.Array",
-            "ESNext.Collection",
-            "ESNext.Iterator",
-            "ESNext.Promise"
-        ],
+        "lib": ["dom", "es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator", "ESNext.Promise"],
         "module": "nodenext",
         "target": "es2024",
         "resolveJsonModule": true,

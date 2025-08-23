@@ -1,4 +1,4 @@
 declare module '../knexfile' {
-  const config: any;
-  export default config;
+    const config: any;
+    export default config;
 }

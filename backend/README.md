@@ -43,8 +43,8 @@ This project is part of my postgraduate studies in Web Development. The main obj
 - Migrations handled by Knex.js to create the `products` table.
 - Example table structure:
 
-| id  | name  | price | description | category | image_url |
-|-----|-------|-------|-------------|----------|------------|
+| id  | name | price | description | category | image_url |
+| --- | ---- | ----- | ----------- | -------- | --------- |
 
 ## 🧪 Testing
 
@@ -54,15 +54,16 @@ To test the API endpoints, you can use the provided `test-api.html` file. This f
 
 1. Open `test-api.html` in your web browser
 2. The interface provides buttons for each CRUD operation:
-   - Create New Product
-   - Delete Product
-   - Update Product
-   - Update Product image
+    - Create New Product
+    - Delete Product
+    - Update Product
+    - Update Product image
 
 ## 🚀 Project Setup
 
 1. Clone the repository
 2. Install FNM and Node (If not installed)
+
 ```bash
 # Installing unzip
 sudo apt update
@@ -75,7 +76,9 @@ curl -fsSL https://fnm.vercel.app/install | bash
 fnm install 24
 node -v
 ```
+
 2. Install [Yarn Berry](https://github.com/yarnpkg/berry):
+
 ```bash
 # Enable corepack
 corepack enable
@@ -83,7 +86,9 @@ corepack enable
 # Set Yarn version to stable in your project
 yarn set version stable
 ```
+
 3. Run:
+
 ```bash
 # Run postgreSQL database in Docker Container
 docker-compose up -d

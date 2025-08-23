@@ -3,10 +3,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 
 function CustomNavbar() {
     return (
-        <div
-            className="d-flex flex-column vh-100 bg-body-tertiary p-2"
-            style={{ width: '200px' }}
-        >
+        <div className="d-flex flex-column vh-100 bg-body-tertiary p-2" style={{ width: '200px' }}>
             <Nav className="flex-column">
                 <Nav.Link as={Link} to="/" className="mb-3 fw-bold">
                     Davi's Imports
